@@ -47,26 +47,40 @@ $(function () {
     } else if (timeBlock > now) {
       timeEl.addClass('future');
 
-    };
+    }
 
 
   })
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
+
+ 
+  
   // TODO: Add code to display the current date in the header of the page.
 });
+
+var buttonContainer = document.querySelector("#container");
+
+// Listen for any clicks within the img-container div
+buttonContainer.addEventListener("click", function (event) {
+  var selectedButton = event.target;
+  console.log(selectedButton)
+  // Check if the clicked element was an image
+  if (selectedButton.matches("button")) {
+    // Get the current value of the image's data-state attribute
+    var state = selectedButton.getAttribute("data-state");
+
+    if (state === "still") {
+      // Change the data-state attribute's value
+      // There are two different ways this attribute can be set
+      selectedButton.dataset.state = "animate";
+      selectedButton.setAttribute("data-state", "animate");
+
+      // Update the image's source to the string being stored in the data-animate attribute
+      selectedButton.setAttribute("src", selectedButton.dataset.animate);
+    } else {
+      // Change the attributes back to their non-animated values
+      selectedButton.dataset.state = "still";
+      selectedButton.setAttribute("src", selectedButton.dataset.still);
+    }
+  }
+});
+
