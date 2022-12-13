@@ -2,6 +2,55 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+  var now = dayjs().$H
+  // .format('ha');
+  console.log(now);
+
+  $('.time-block').each(function () {
+    var timeEl = $(this);
+    var timeBlock = parseInt(timeEl.attr('id').split('-')[1]);
+    console.log(timeEl, timeBlock);
+
+    //so since our NOW is in military time, then we are going to need to account for how the number we are comparing our time with is also in miltary time
+    if (now > 12 && timeBlock == 1) {
+
+      timeBlock += 12;
+      console.log(timeBlock);
+
+    };
+    if (now > 12 && timeBlock == 3) {
+
+      timeBlock += 12;
+      console.log(timeBlock);
+
+    };
+    if (now > 12 && timeBlock == 4) {
+
+      timeBlock += 12;
+      console.log(timeBlock);
+
+    };
+    if (now > 12 && timeBlock == 5) {
+
+      timeBlock += 12;
+      console.log(timeBlock);
+
+    };
+
+
+    //this cute lil function is what adds in the correct styling for the timeblock depending on the time that the site was loaded 
+    if (timeBlock < now) {
+      timeEl.addClass('past');
+    } else if (timeBlock == now) {
+      timeEl.addClass('present');
+
+    } else if (timeBlock > now) {
+      timeEl.addClass('future');
+
+    };
+
+
+  })
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
